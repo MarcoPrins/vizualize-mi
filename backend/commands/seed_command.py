@@ -2,18 +2,16 @@ from flask_script import Command
 import os
 import sqlite3
 from sqlite3 import Error
-from flask import Flask
+from flask import Flask, current_app
 
-app = Flask(__name__)
-app.config.from_object('config.DevelopmentConfig')
 
 class SeedCommand(Command):
     """ Seed the DB."""
     def run(self):
       try:
         print("Seeding data")
-        conn = sqlite3.connect(app.config['DB_NAME'])
-        file_path = os.path.join(app.config['PROJECT_ROOT'], 'seed_data.sql')
+        conn = sqlite3.connect(current_app.config['DB_NAME'])
+        file_path = os.path.join(current_app.config['PROJECT_ROOT'], 'seed_data.sql')
         sql_statements = open(file_path).read()
         with conn:
           cursor = conn.cursor()
