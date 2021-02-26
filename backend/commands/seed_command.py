@@ -11,7 +11,7 @@ class SeedCommand(Command):
       try:
         print("Seeding data")
         conn = sqlite3.connect(current_app.config['DB_NAME'])
-        file_path = os.path.join(current_app.config['PROJECT_ROOT'], 'seed_data.sql')
+        file_path = os.path.join(current_app.config['PROJECT_ROOT'], 'fixtures/seed_data.sql')
         sql_statements = open(file_path).read()
         with conn:
           cursor = conn.cursor()

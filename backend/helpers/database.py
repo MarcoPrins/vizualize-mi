@@ -14,7 +14,7 @@ def close_connection(exception):
     if db is not None:
         db.close()
 
-def query_db(query, args=(), one=False):
+def execute_sql(query, args=(), one=False):
     cur = get_db().execute(query, args)
     rv = cur.fetchall()
     cur.close()
