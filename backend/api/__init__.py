@@ -2,7 +2,6 @@ from flask_restful import Api
 from flask import Flask
 from flask_cors import CORS
 
-# Instantiate the app
 app = Flask(__name__)
 
 # Configure environment
@@ -10,8 +9,6 @@ if app.config["ENV"] == "development":
     app.config.from_object("config.DevelopmentConfig")
 elif app.config["ENV"] == "production":
     app.config.from_object("config.ProductionConfig")
-elif app.config["ENV"] == "test":
-    app.config.from_object("config.TestingConfig")
 
 # Instantiate CORS and flask_restful api
 cors = CORS()

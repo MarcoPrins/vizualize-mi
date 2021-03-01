@@ -1,4 +1,5 @@
 import sqlite3
+from sqlite3 import Error
 from flask import current_app, g
 
 
@@ -8,7 +9,6 @@ def get_db():
         db = g._database = sqlite3.connect(current_app.config['DB_NAME'])
     return db
 
-@current_app.teardown_appcontext
 def close_connection(exception):
     db = getattr(g, '_database', None)
     if db is not None:
@@ -19,3 +19,12 @@ def execute_sql(query, args=(), one=False):
     rv = cur.fetchall()
     cur.close()
     return (rv[0] if rv else None) if one else rv
+
+def execute_multi_sql(sql):
+    db = get_db()
+    with db:
+      cursor = db.cursor()
+      cursor.executescript(sql)
+      db.commit()
+    db.close()
+
