@@ -1,19 +1,17 @@
 import json
 import unittest
+from flask import Flask, current_app
 
 from api.tests.base import BaseTestCase
 
 
-class TestSimulationsService(BaseTestCase):
-    """ Tests for the Simulation Service """
-
+class TestSimulations(BaseTestCase):
+    """ Tests for the /simulations POST endpoint"""
     def test_simulations(self):
-        """ Ensure the /ping route behaves correctly. """
-        response = self.client.get("/simulations/ping")
-        data = json.loads(response.data.decode())
+        """ Ensure the /simulations POST action behaves correctly. """
+        response = self.client.post("/simulations?region_id=de_berlin&number_of_requests=2")
+        # data = json.loads(response.data.decode())
         self.assertEqual(response.status_code, 200)
-        self.assertIn("pong!", data["message"])
-        self.assertIn("success", data["status"])
 
 
 if __name__ == "__main__":
