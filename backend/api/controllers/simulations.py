@@ -4,7 +4,7 @@ from helpers.database import execute_sql
 
 parser = reqparse.RequestParser()
 parser.add_argument('number_of_requests', type=int)
-parser.add_argument('region', type=str)
+parser.add_argument('region_id', type=str)
 
 class Simulations(Resource):
     def post(self):
@@ -15,7 +15,7 @@ class Simulations(Resource):
             from region_bounding_box
             where region_id = ?
           """,
-          [args['region']]
+          [args['region_id']]
         )[0]
         result = Simulator(region).simulate(args['number_of_requests'])
         return {"status": "success", "message": result}
