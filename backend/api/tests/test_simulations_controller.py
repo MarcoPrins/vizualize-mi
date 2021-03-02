@@ -6,7 +6,7 @@ from api.tests.base import BaseTestCase
 from helpers.database import execute_sql
 
 
-class TestSimulations(BaseTestCase):
+class TestSimulationsController(BaseTestCase):
     """ Tests for the /simulations POST endpoint"""
     def test_simulations_success(self):
         """ POST /simulations creates a bounding box and returns the correct data """
@@ -57,6 +57,7 @@ class TestSimulations(BaseTestCase):
 
     def test_simulations_no_region(self):
         """ POST /simulations returns 404 if there is no bounding box with specified region_id """
+
         response = self.client.post("/simulations?region_id=de_berlin&number_of_requests=2")
 
         # Check database
@@ -68,6 +69,20 @@ class TestSimulations(BaseTestCase):
         data = json.loads(response.data.decode())
 
         self.assertEqual(data, {"message": "Region not found"})
+
+    def test_simulations_bad_args(self):
+        """ POST /simulations returns 400 if any arguments are missing """
+
+        response = self.client.post("/simulations?region_id=de_berlin")
+
+        # Check database
+        booking_distances = execute_sql("select * from booking_distance")
+        self.assertEqual(booking_distances, [])
+
+        # Check response
+        self.assertEqual(response.status_code, 410)
+        data = json.loads(response.data.decode())
+        self.assertEqual(data, {"message": {"number_of_requests": "Missing required parameter in the JSON body or the post body or the query string"}})
 
 
 if __name__ == "__main__":

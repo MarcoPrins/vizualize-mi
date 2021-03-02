@@ -1,4 +1,4 @@
 from . import api
-from api.controllers.simulations import Simulations
+from api.controllers.simulations_controller import SimulationsController
 
-api.add_resource(Simulations, "/simulations")
+api.add_resource(SimulationsController, "/simulations")
