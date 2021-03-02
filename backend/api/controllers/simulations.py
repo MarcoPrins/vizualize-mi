@@ -9,13 +9,20 @@ parser.add_argument('region_id', type=str)
 class Simulations(Resource):
     def post(self):
         args = parser.parse_args()
-        region = execute_sql(
+        region_id = args['region_id']
+        number_of_requests = args['number_of_requests']
+
+        regions = execute_sql(
           """
             select min_longitude, min_latitude, max_longitude, max_latitude
             from region_bounding_box
             where region_id = ?
           """,
-          [args['region_id']]
-        )[0]
-        result = Simulator(region).simulate(args['number_of_requests'])
-        return {"status": "success", "message": result}
+          [region_id]
+        )
+
+        if (len(regions) > 0):
+            result = Simulator(regions[0]).simulate(number_of_requests)
+            return result, 200
+        else:
+            return {"message": "Region not found"}, 404
