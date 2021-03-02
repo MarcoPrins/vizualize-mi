@@ -9,7 +9,7 @@ from helpers.database import execute_sql
 class TestSimulationsController(BaseTestCase):
     """ Tests for the /simulations POST endpoint"""
     def test_simulations_success(self):
-        """ POST /simulations creates a bounding box and returns the correct data """
+        """ POST /simulations creates a bounding box record and returns the correct data """
 
         execute_sql(
           """
@@ -34,9 +34,9 @@ class TestSimulationsController(BaseTestCase):
 
         response = self.client.post("/simulations?region_id=de_berlin&number_of_requests=2")
 
-        # Check database
+        # Check database (record created)
         booking_distances = execute_sql("select * from booking_distance")
-        self.assertEqual(booking_distances, [])
+        self.assertEqual(booking_distances, [(1, 'de_berlin', 0, 0, 1, 1)])
 
         # Check response
         self.assertEqual(response.status_code, 200)
@@ -60,7 +60,7 @@ class TestSimulationsController(BaseTestCase):
 
         response = self.client.post("/simulations?region_id=de_berlin&number_of_requests=2")
 
-        # Check database
+        # Check database (no records created)
         booking_distances = execute_sql("select * from booking_distance")
         self.assertEqual(booking_distances, [])
 
@@ -75,12 +75,12 @@ class TestSimulationsController(BaseTestCase):
 
         response = self.client.post("/simulations?region_id=de_berlin")
 
-        # Check database
+        # Check database (no records created)
         booking_distances = execute_sql("select * from booking_distance")
         self.assertEqual(booking_distances, [])
 
         # Check response
-        self.assertEqual(response.status_code, 410)
+        self.assertEqual(response.status_code, 400)
         data = json.loads(response.data.decode())
         self.assertEqual(data, {"message": {"number_of_requests": "Missing required parameter in the JSON body or the post body or the query string"}})
 
