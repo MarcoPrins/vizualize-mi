@@ -10,22 +10,20 @@ class SimulationDashboard extends Component {
     this.handleUpdate = this.handleUpdate.bind(this);
 
     this.state = {
-      region_id: 'de_berlin',
-      number_of_requests: 1,
-      simulation_results: null,
+      regionId: 'de_berlin',
+      numberOfRequests: 1,
+      simulationResults: null,
     }
   }
 
   triggerSimulation() {
-    const { region_id, number_of_requests } = this.state;
+    const { regionId, numberOfRequests } = this.state;
 
     axios.post(`${process.env.REACT_APP_BACKEND_URL}/simulations`, {
-      region_id,
-      number_of_requests,
+      region_id: regionId,
+      number_of_requests: numberOfRequests,
     })
-      .then((response) => {
-        this.setState({ simulation_results: response })
-      })
+      .then(response => this.setState({ simulationResults: response.data }))
       .catch((err) => {
         // TODO: Proper error handling
         console.log(err);
@@ -39,17 +37,17 @@ class SimulationDashboard extends Component {
   }
 
   render() {
-    const { simulation_results, region_id, number_of_requests } = this.state;
+    const { simulationResults, regionId, numberOfRequests } = this.state;
 
     return(
       <div>
         <form>
-          <div class="mb-3">
-            <label for="number_of_requests" class="form-label">Number of requests</label>
+          <div class="mt-3">
+            <label for="numberOfRequests" class="form-label">Number of requests</label>
             <input
-              name="number_of_requests"
-              id="number_of_requests"
-              value={number_of_requests}
+              name="numberOfRequests"
+              id="numberOfRequests"
+              value={numberOfRequests}
               type="number"
               class="form-control"
               onChange={this.handleUpdate}
@@ -57,26 +55,26 @@ class SimulationDashboard extends Component {
           </div>
 
           <div class="mb-3">
-            <label for="region_id" class="form-label">Region ID</label>
+            <label for="regionId" class="form-label">Region ID</label>
             <input
-              name="region_id"
-              id="region_id"
-              value={region_id}
+              name="regionId"
+              id="regionId"
+              value={regionId}
               type="text"
               class="form-control"
               onChange={this.handleUpdate}
             />
           </div>
-
-          <button className="btn btn-primary" onClick={this.triggerSimulation}>
-            Trigger Simulation
-          </button>
         </form>
 
+        <button className="btn btn-primary" onClick={this.triggerSimulation}>
+          Trigger Simulation
+        </button>
 
-        {simulation_results &&
+
+        {simulationResults &&
           <div>
-            <SimulationPreview data={simulation_results} />
+            <SimulationPreview data={simulationResults} />
           </div>}
       </div>
     );
