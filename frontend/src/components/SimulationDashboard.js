@@ -13,6 +13,7 @@ class SimulationDashboard extends Component {
       regionId: 'de_berlin',
       numberOfRequests: 1,
       simulationResults: null,
+      error: null,
     }
   }
 
@@ -24,10 +25,7 @@ class SimulationDashboard extends Component {
       number_of_requests: numberOfRequests,
     })
       .then(response => this.setState({ simulationResults: response.data }))
-      .catch((err) => {
-        // TODO: Proper error handling
-        console.log(err);
-      });
+      .catch(err => this.setState({simulationResults: null}));
   }
 
   handleUpdate(event) {
@@ -57,6 +55,7 @@ class SimulationDashboard extends Component {
           <div class="mb-3">
             <label for="regionId" class="form-label">Region ID</label>
             <input
+              disabled
               name="regionId"
               id="regionId"
               value={regionId}

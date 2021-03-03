@@ -15,7 +15,7 @@ const featureShape = PropTypes.shape({
 const propTypes = {
   data: PropTypes.shape({
     most_popular_dropoff_points: featureShape,
-    most_popular_dropoff_points: featureShape,
+    most_popular_pickup_points: featureShape,
   }).isRequired,
 };
 
@@ -28,7 +28,7 @@ class SimulationPreview extends Component {
     this.state = {
       showPickup: true,
       showDropoff: true,
-    }
+    };
   }
 
   markerProps(featureCollection) {
@@ -41,7 +41,6 @@ class SimulationPreview extends Component {
         }
       }
     });
-    console.log(coords)
     return coords;
   }
 

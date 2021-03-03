@@ -52,8 +52,8 @@ class TestSimulationsController(BaseTestCase):
             }
         )
 
-        self.assertEqual(type(data["most_popular_dropoff_points"]), str)
-        self.assertEqual(type(data["most_popular_pickup_points"]), str)
+        self.assertEqual(type(data["most_popular_dropoff_points"]), dict)
+        self.assertEqual(type(data["most_popular_pickup_points"]), dict)
 
     def test_simulations_no_region(self):
         """ POST /simulations returns 404 if there is no bounding box with specified region_id """
