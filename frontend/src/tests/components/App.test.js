@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
-import App from '../../components/App.jsx';
+import App from '../../components/App.js';
 
-test('renders learn react link', () => {
+test('renders a navbar', () => {
   render(<App />);
-  const textElement = screen.getByText(/Coda Challenge/i);
+  const textElement = screen.getByText(/Simulate a ridepooling service!/i);
   expect(textElement).toBeInTheDocument();
 });

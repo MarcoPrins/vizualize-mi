@@ -24,13 +24,11 @@ class SimulationDashboard extends Component {
       number_of_requests,
     })
       .then((response) => {
-        this.setState({
-          simulation_results: response,
-        })
+        this.setState({ simulation_results: response })
       })
-      .catch(() => {
+      .catch((err) => {
         // TODO: Proper error handling
-        console.log('failed');
+        console.log(err);
       });
   }
 
@@ -48,12 +46,26 @@ class SimulationDashboard extends Component {
         <form>
           <div class="mb-3">
             <label for="number_of_requests" class="form-label">Number of requests</label>
-            <input name="number_of_requests" value={number_of_requests} type="number" class="form-control" onChange={this.handleUpdate} />
+            <input
+              name="number_of_requests"
+              id="number_of_requests"
+              value={number_of_requests}
+              type="number"
+              class="form-control"
+              onChange={this.handleUpdate}
+            />
           </div>
 
           <div class="mb-3">
             <label for="region_id" class="form-label">Region ID</label>
-            <input name="region_id" value={region_id} type="text" class="form-control" onChange={this.handleUpdate} />
+            <input
+              name="region_id"
+              id="region_id"
+              value={region_id}
+              type="text"
+              class="form-control"
+              onChange={this.handleUpdate}
+            />
           </div>
 
           <button className="btn btn-primary" onClick={this.triggerSimulation}>
