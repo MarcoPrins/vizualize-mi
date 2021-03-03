@@ -5,11 +5,11 @@ import '../styles/App.css';
 function App() {
   return (
     <Fragment>
-      <nav class="navbar navbar-dark bg-dark">
-        <div class="container">
-          <div class="row">
-            <div class="col-sm">
-              <span class="navbar-text">
+      <nav className="navbar navbar-dark bg-dark">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm">
+              <span className="navbar-text">
                 Simulate a ridepooling service!
               </span>
             </div>
@@ -17,9 +17,9 @@ function App() {
         </div>
       </nav>
       <div className="App">
-        <div class="container">
-          <div class="row gy-5">
-            <div class="col-sm">
+        <div className="container">
+          <div className="row gy-5">
+            <div className="col-sm">
               <SimulationDashboard />
             </div>
           </div>

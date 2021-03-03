@@ -40,27 +40,27 @@ class SimulationDashboard extends Component {
     return(
       <div>
         <form>
-          <div class="mt-3">
-            <label for="numberOfRequests" class="form-label">Number of requests</label>
+          <div className="mt-3">
+            <label htmlFor="numberOfRequests" className="form-label">Number of requests</label>
             <input
               name="numberOfRequests"
               id="numberOfRequests"
               value={numberOfRequests}
               type="number"
-              class="form-control"
+              className="form-control"
               onChange={this.handleUpdate}
             />
           </div>
 
-          <div class="mb-3">
-            <label for="regionId" class="form-label">Region ID</label>
+          <div className="mb-3">
+            <label htmlFor="regionId" className="form-label">Region ID</label>
             <input
               disabled
               name="regionId"
               id="regionId"
               value={regionId}
               type="text"
-              class="form-control"
+              className="form-control"
               onChange={this.handleUpdate}
             />
           </div>
