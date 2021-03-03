@@ -1,8 +1,8 @@
 import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
-
-import mockResponse from '../mocks/postSimulations';
 import { render, fireEvent } from '@testing-library/react';
+
+import mockResponse from '../mocks/postSimulations.js';
 import SimulationDashboard from '../../components/SimulationDashboard.js';
 import SimulationPreview from '../../components/SimulationPreview.js';
 
