@@ -101,9 +101,9 @@ class SimulationPreview extends Component {
             initialCenter={{lat: 52.540613713487126, lng: 13.438452014140616}}
             google={this.props.google}
             style={{
-              width: '900px',
-              height: '600px',
-              marginTop: '15px',
+              width: "900px",
+              height: "600px",
+              marginTop: "15px",
             }}
           >
             {showPickup && pickupProps.map(pickup => <Marker { ...pickup } />)}
