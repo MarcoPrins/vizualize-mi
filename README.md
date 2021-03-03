@@ -15,8 +15,9 @@ I really spent a lot of time on this project, mainly due to getting the configur
 ### Frontend
 * **Why no redux?**. The redux team actually [recommends against](https://redux.js.org/introduction/getting-started#should-you-use-redux) using the library too early and advises that it's not the solution for every frontend app. I have seen people decide to use redux just because it's a buzz word, and I think it can turn ugly when you use it for the wrong reason. Since there is no heavy state management in this app, I didn't use redux.
 * I used **axios** because it's simple and lightweight for basic http requests.
+* Twitter Bootstrap because it's fantastic.
 * I used the `google-maps-react` npm library to visualise the results with Google Maps - Using a map to visualise the data was definitely a no-brainer for me.
-* If I had more time, I would have added an endpoint to pull all the regions (`de_berlin`, `de_munich`, etc.) from the API, and popluated them in a dropdown in `SimulationDashboard`. Then I could have passed the bounding box data down to `SimulationPreview` to center the map on this region. This would have also avoided having to hard code `de_berlin` in the inital props (hard coding it is bad because we are just assuming this value will be in the db..)
+* If I had more time, I would have added an endpoint to pull all the regions (`de_berlin`, `de_munich`, etc.) from the API, and popluated their ID's in a dropdown in `SimulationDashboard`. Then I could have also passed the bounding box data down to `SimulationPreview` to center the map on this region. This would have also avoided having to hard code `de_berlin` in the initial props (hard coding it is bad because we are just assuming this value will be in the db..)
 * I also hard coded Berlin's center point in the preview component, which I acknowledge is bad and it was because I have no time left.
 
 ### Backend
