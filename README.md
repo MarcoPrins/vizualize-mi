@@ -26,7 +26,7 @@ I really spent a lot of time on this project, mainly due to getting the configur
 * **Why no SQLAlchemy** ? For this simple app I prefer the explicit and transparent view over the SQL being executed, and low overhead instead of using an ORM. This is not a dogmatic opinion, I just think it's a bit nicer.
 * I added a separate Dockerfile for production, which uses `gunicorn`.
 * There aren't enough endpoints to call this a pattern yet, but as this app scales I would continue to structure endpoints in the restful controller pattern.
-* There are some warnings from 3rd party libraries when running `pytest`. I didn't sort them out because I didn't see this as the point of the assignment so I spent my time on other aspects.
+* There are some warnings from 3rd party libraries in both backend and frontend. I didn't sort them out because I didn't see this as the point of the assignment so I spent my time on other aspects.
 
 ----
 
