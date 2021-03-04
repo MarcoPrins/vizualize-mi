@@ -52,7 +52,9 @@ class SimulationPreview extends Component {
 
   render() {
     const { showPickup, showDropoff } = this.state;
-    const { most_popular_pickup_points, most_popular_dropoff_points } = this.props.data;
+    const { google, data } = this.props;
+
+    const { most_popular_pickup_points, most_popular_dropoff_points } = data;
     const pickupProps = this.markerProps(most_popular_pickup_points);
     const dropoffProps = this.markerProps(most_popular_dropoff_points);
 
@@ -69,11 +71,11 @@ class SimulationPreview extends Component {
                 type="checkbox"
                 name="showPickup"
                 id="showPickup"
-                class="form-check-input"
+                className="form-check-input"
                 checked={showPickup}
                 onChange={this.handleUpdate}
               />
-              <label for="showPickup" className="form-check-label">
+              <label htmlFor="showPickup" className="form-check-label">
                 Show Pickup Points
               </label>
             </div>
@@ -83,11 +85,11 @@ class SimulationPreview extends Component {
                 type="checkbox"
                 name="showDropoff"
                 id="showDropoff"
-                class="form-check-input"
+                className="form-check-input"
                 checked={showDropoff}
                 onChange={this.handleUpdate}
               />
-              <label for="showDropoff" className="form-check-label">
+              <label htmlFor="showDropoff" className="form-check-label">
                 Show Dropoff Points
               </label>
             </div>
@@ -98,15 +100,18 @@ class SimulationPreview extends Component {
           <Map
             zoom={12}
             initialCenter={{lat: 52.540613713487126, lng: 13.438452014140616}}
-            google={this.props.google}
+            google={google}
+            testId="preview-map"
             style={{
               width: "900px",
               height: "600px",
               marginTop: "15px",
             }}
           >
-            {showPickup && pickupProps.map(pickup => <Marker { ...pickup } />)}
-            {showDropoff && dropoffProps.map(dropoff => <Marker { ...dropoff } />)}
+            {showPickup && pickupProps.map(
+              (pickup, i) => { return <Marker key={i} { ...pickup } /> })}
+            {showDropoff && dropoffProps.map(
+              (dropoff, i) => { return <Marker key={pickupProps.length + i} { ...dropoff } /> })}
           </Map>
         </div>
       </div>
@@ -116,6 +121,8 @@ class SimulationPreview extends Component {
 
 SimulationPreview.propTypes = propTypes;
 
+export { SimulationPreview };
 export default GoogleApiWrapper({
   apiKey: process.env.REACT_APP_GOOGLE_MAPS_KEY,
 })(SimulationPreview);
+
