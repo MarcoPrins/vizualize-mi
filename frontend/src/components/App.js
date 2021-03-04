@@ -17,7 +17,7 @@ function App() {
         </div>
       </nav>
       <div className="App">
-        <div className="container">
+        <div className="container mb-5">
           <div className="row gy-5">
             <div className="col-sm">
               <SimulationDashboard />
