@@ -60,8 +60,8 @@ class SimulationPreview extends Component {
 
     return(
       <div className="row">
-        <div className="col-12 mt-3">
-          Here is your simulation
+        <div className="col-12 mt-4">
+          <h3>Here is your simulation</h3>
         </div>
 
         <div className="col-12 mt-3">
@@ -102,10 +102,12 @@ class SimulationPreview extends Component {
             initialCenter={{lat: 52.540613713487126, lng: 13.438452014140616}}
             google={google}
             testId="preview-map"
-            style={{
-              width: "900px",
+            containerStyle={{
+              width: "100%",
               height: "600px",
               marginTop: "15px",
+              marginBottom: "15px",
+              position: "relative",
             }}
           >
             {showPickup && pickupProps.map(
