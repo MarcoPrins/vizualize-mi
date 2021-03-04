@@ -2,7 +2,7 @@
 
 ## Setup
 
-Please look in the respective frontend & backend directores how to set up each service.
+Please look in the respective [frontend](https://github.com/MarcoPrins/vizualize-mi/tree/master/frontend) & [backend](https://github.com/MarcoPrins/vizualize-mi/tree/master/backend) directores how to set up each service.
 
 ## Implementation notes
 
