@@ -1,7 +1,9 @@
 # Getting started
 
 1. Install [docker-compose](https://docs.docker.com/compose/install/) and build the container with:
-```docker-compose build```
+```
+docker-compose build
+```
 2. Seed the database:
 ```
 docker-compose run api python manage.py seed_db
