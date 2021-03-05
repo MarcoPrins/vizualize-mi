@@ -1,45 +1,29 @@
-# Mock-Simulator
+# Getting started
 
-This module (`simulator.py`) provides a class `Simulator` that returns some mock simulation results. It does not actually simulate any services, etc, but it should be used as if it did.
-
-## Setup
-1. Initialize a virtual environment and install the requirements in `requirements.txt`.
-```python
-pip install -r requirements.txt
+1. Install [docker-compose](https://docs.docker.com/compose/install/) and build the container with:
 ```
-2. Seed the database with this:
-```python
-python manage.py seed_db
+docker-compose build
 ```
-3. Run the backend with this:
-```python
-python wsgi.py
+2. Seed the database:
 ```
-4. Run the test with this:
-```python
-pip install pytest
-pytest
+docker-compose run api python manage.py seed_db
+```
+3. Add file called .env in this directory with the following contents:
+```
+FLASK_APP=wsgi.py
+FLASK_ENV=development
 ```
 
-## Usage
-- Create a `Simulator` instance (`Simulator(bounding_box)`) where `bounding_box` is a `tuple` that looks like this:
-```python
-# bounding_box = (min_longitude, min_latitude, max_longitude, max_latitude)
-bounding_box = (13.34014892578125, 52.52791908000258, 13.506317138671875, 52.562995039558004)
+4. Run the server:
 ```
-The bounding box has to be in Berlin.
-
-- Get the simulation results:
-```python
-result = Simulator(bounding_box).simulate(number_of_requests)
+docker-compose up
 ```
-where `number_of_requests` is the number of requests to our Ridepooling service to "simulate".
 
-## Output
-The `result` we get is a `dict` that looks like the following:
+The backend will run at `http://localhost:5000`.
 
-| Key                           | Type                                                               | Description                                                                                                                     |
-|-------------------------------|--------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------|
-| `booking_distance_bins`       | dict                                                               | How many bookings happened for every "kilometer bin". E.g. how many bookings had a distance between 0 and 1km, 1 and 2kms, etc. |
-| `most_popular_dropoff_points` | String (valid [`.geojson`](https://en.wikipedia.org/wiki/GeoJSON)) | Which points within the simulated bounding box were the most popular dropoff points.                                            |
-| `most_popular_pickup_points`  | String (valid [`.geojson`](https://en.wikipedia.org/wiki/GeoJSON)) | Which points within the simulated bounding box were the most popular pickup points.                                             |
+## Tests
+
+Tests can be run with
+```
+docker-compose run api pytest
+```
